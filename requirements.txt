@@ -71,7 +71,6 @@ toml==0.10.1
 tornado==6.0.4
 tqdm==4.48.2
 urllib3==1.25.8
-virtualenv==20.0.31
 wcwidth==0.2.5
 webencodings==0.5.1
 Werkzeug==1.0.1
