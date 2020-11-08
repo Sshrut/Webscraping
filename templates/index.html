@@ -4,14 +4,19 @@
 	<title>Webscraping</title>
 </head>
 <body>
-	<form method="POST" action="{{url_for('predict')}}">
+	<form method="POST" action="{{ url_for('predict')}}" >
 	<input name="key" type="text"  placeholder="Enter the Keyword">
 	<br>
 	<br>
 	<button type="submit">Submit</button>
-	</form>
+	<br>
 	<br>
 	{{answer}}
+
+
+	</form>
+	<br>
+	
 
 </body>
 </html>

@@ -60,10 +60,11 @@ def ans_result(user_str):
 
 	return final_ans
 
+
 @app.route('/')
 def home():
-	
 	return render_template('index.html')
+
 
 @app.route('/predict',methods=['POST'])
 def predict():
@@ -74,7 +75,7 @@ def predict():
 	except:
 		pass
 
-	return render_template('predict.html',answer=final_result)
+	return render_template('index.html',answer=final_result)
 
 if __name__=='__main__':
 	app.run(debug=True)  
