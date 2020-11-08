@@ -19,31 +19,25 @@ def ans_result(user_str):
 	new=soup.find('div',{'id':'main'})
 	asdf=new.find('div',{'class':'kCrYT'})
 	#print(new.prettify())
-	try:
+	
+	need=str(asdf.a)
+	if need=='None':
+		new=soup.find('div',{'class':'BNeawe UPmit AP7Wnd'}).text
+		l=new.split(' ')
+		final_url='https://'+l[0]+'/'+l[2]
 
-		need=str(asdf.a)
-		if need=='None':
-			new=soup.find('div',{'class':'BNeawe UPmit AP7Wnd'}).text
-			l=new.split(' ')
-			final_url='https://'+l[0]+'/'+l[2]
-    
-		else:
-			ans=re.search("(?P<url>https?://[^\s]+)", need).group("url")
-			final_url=ans.split(';')[0][:-5]
-	except:
-		pass
+	else:
+		ans=re.search("(?P<url>https?://[^\s]+)", need).group("url")
+		final_url=ans.split(';')[0][:-5]
 
-
-    	#print(final_url)
+	#print(final_url)
 	page=requests.get(final_url).text
 
 	new_soup=BeautifulSoup(page,'html.parser')
 	content=new_soup.find('div',{'class':'entry-content'})
-	try:
-		allresult=content.find_all('p')
-		result=content.find('p').text
-	except:
-		pass
+
+	allresult=content.find_all('p')
+	result=content.find('p').text
 
 	ans_f=[]
 
@@ -68,12 +62,10 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-	try:
-		int_feature=request.form['key']
-		user_str=str(int_feature)
-		final_result=str(ans_result(user_str))
-	except:
-		pass
+
+	int_feature=request.form['key']
+	user_str=str(int_feature)
+	final_result=str(ans_result(user_str))
 
 	return render_template('index.html',answer=final_result)
 
