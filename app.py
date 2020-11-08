@@ -1,10 +1,10 @@
 from flask import Flask,render_template,request
 import pickle
-import numpy as np
 from bs4 import BeautifulSoup
 import requests,html5lib,lxml
 from urllib.request import urlopen
 import re
+import os
 
 
 
@@ -70,5 +70,6 @@ def predict():
 	return render_template('index.html',answer=final_result)
 
 if __name__=='__main__':
-	app.debug=True
-	app.run()
+	port = int(os.environ.get("PORT", 5000))
+	app.run(debug=True, host='0.0.0.0', port=port)
+	
