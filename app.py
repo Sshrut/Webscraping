@@ -44,7 +44,7 @@ def ans_result(user_str):
 	if result=='':
 		flag=0
 		for i in allresult:
-			ans.append(i.text)
+			ans_f.append(i.text)
 			flag+=1
 			if flag==2:
 				break
