@@ -19,16 +19,21 @@ def ans_result(user_str):
 	new=soup.find('div',{'id':'main'})
 	asdf=new.find('div',{'class':'kCrYT'})
 	#print(new.prettify())
-	need=str(asdf.a)
-	if need=='None':
-		new=soup.find('div',{'class':'BNeawe UPmit AP7Wnd'}).text
-		l=new.split(' ')
-		final_url='https://'+l[0]+'/'+l[2]
+	try:
+
+		need=str(asdf.a)
+		if need=='None':
+			new=soup.find('div',{'class':'BNeawe UPmit AP7Wnd'}).text
+			l=new.split(' ')
+			final_url='https://'+l[0]+'/'+l[2]
     
-	else:
-		ans=re.search("(?P<url>https?://[^\s]+)", need).group("url")
-		final_url=ans.split(';')[0][:-5]
-    
+		else:
+			ans=re.search("(?P<url>https?://[^\s]+)", need).group("url")
+			final_url=ans.split(';')[0][:-5]
+	except:
+		pass
+
+
     	#print(final_url)
 	page=requests.get(final_url).text
 
@@ -41,6 +46,7 @@ def ans_result(user_str):
 		pass
 
 	ans_f=[]
+
 	if result=='':
 		flag=0
 		for i in allresult:
@@ -61,10 +67,12 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-	int_feature=request.form['key']
-	user_str=str(int_feature)
-	final_result=str(ans_result(user_str))
-	
+	try:
+		int_feature=request.form['key']
+		user_str=str(int_feature)
+		final_result=str(ans_result(user_str))
+	except:
+		pass
 
 	return render_template('predict.html',answer=final_result)
 
